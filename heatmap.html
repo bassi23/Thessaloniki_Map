@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script type='text/javascript' src='js/p5.min.js'></script>
+    <script type='text/javascript' src='js/p5.dom.min.js'></script>
+    <script type='text/javascript' src='js/tom.js'></script>
+    <script type='text/javascript' src='js/draw.js'></script>
+    <script type='text/javascript' src='js/sketch.js'></script>
+  </head>
+
+  <body onload="drawmap();">
+    <div id="map"></div>
+    <script src="js/leaflet-heat.js"></script>
+    <script>
+      var map = L.map('map').setView([40.64361, 22.93086], 12);
+      var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      getPoints();
+      let heatData = [];
+      for (let i = 0; i < temperature_history.length; i++) {
+        heatData[i] = [40.64361, 22.93086, temperature_history[i]];
+      }
+      console.log(heatData);
+      var heat = L.heatLayer(heatData, {
+        radius: 50
+      }).addTo(map);
+      // Position und Zoomstufe der Karte
+      var lon = 22.9612169;
+      var lat = 40.6268430;
+      var zoom = 13;
+
+
+      map = new OpenLayers.Map('map', {
+        projection: new OpenLayers.Projection("EPSG:900913"),
+        displayProjection: new OpenLayers.Projection("EPSG:4326"),
+        controls: [
+          new OpenLayers.Control.Navigation(),
+          new OpenLayers.Control.LayerSwitcher(),
+          new OpenLayers.Control.PanZoomBar()
+        ],
+        maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+          20037508.34, 20037508.34),
+        numZoomLevels: 18,
+        maxResolution: 156543,
+        units: 'meters'
+      });
+
+      layer_mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
+      layer_markers = new OpenLayers.Layer.Markers("Address", {
+        projection: new OpenLayers.Projection("EPSG:4326"),
+        visibility: true,
+        displayInLayerSwitcher: false
+      });
+
+      map.addLayers([layer_mapnik, layer_markers]);
+      jumpTo(lon, lat, zoom);
+
+      // Position des Markers
+      addMarker(layer_markers, 22.9612169, 40.6268430, popuptext);
+
+    </script>
+  </body>
+
+</html>
