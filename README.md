@@ -3,7 +3,7 @@
 ## How to use it
 Just download the whole folder as .zip, and unzip it. The main page is called "index.html". Open it and you will see the main page with the map and the newest data from the sensor.
 
-## How does the map get the sensor data?
+## How to get the sensor data
 
 The sensor data is provided in JSON Format (JavaScript Object Notation) and can be accessed over an API Key. The code for that is in the file "sketch.js". We use the "p5.js" library, in which the functions preload() and loadJSON() is defined.
 
@@ -67,5 +67,42 @@ function setup() {
     pm10_forecast[i] = data.forecast[i].values[1].value;
   }
 }
+
+```
+So now every data we have is stored in arrays.
+
+## How to display data on the map as marker
+
+Now, that we have all the data, we want to display it as popuptext and with a marker on the map. For that we use "Openstreetmaps". For the implementation of the map, you have to reference the source code of the map in the head of your HTML file "index.html".
+
+
+```html
+<!DOCTYPE html>
+<html>
+  <html lang="de">
+    <meta charset="utf-8" />
+    <head>
+      <link rel="stylesheet" type="text/css" href="CSS/main.css" media="screen" />
+      <script type='text/javascript' src='js/p5.min.js'></script>
+      <script type='text/javascript' src='js/p5.dom.min.js'></script>
+      <script type='text/javascript' src='js/tom.js'></script>
+      <script type='text/javascript' src='js/sketch.js'></script>
+      <script type='text/javascript' src='js/draw.js'></script>
+      <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+      <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css">
+      <script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
+      <script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+    </head>
+
+    <body onload="drawmap();">
+
+      <div id="header">
+      </div>
+      <p>Data visualitation on maps </p>
+      <div id="map">
+      </div>
+    </body>
+
+  </html>
 
 ```
