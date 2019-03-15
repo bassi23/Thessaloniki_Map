@@ -155,7 +155,7 @@ In popuptext you decide what should be displayed in the popup.Let's keep it simp
   popuptext = "<font color=\"black\">Time: " + time[time.length - 1].toString() + "<br>Temperature = <a href='temperature.html'>" + temperature_history[temperature_history.length - 1].toString() + " °C</a></font>";
 ```
 
-To get the newest values, you take the last entry of each array. For example time[time.length - 1]. To display it in the popuptext, you now also have to convert it into a string, by just adding ".toString()" at the end. You can add linebreaks with <br> and add links by the command  <a href='yourTargetSite.html'>.
+To get the newest values, you take the last entry of each array. For example time[time.length - 1]. To display it in the popuptext, you now also have to convert it into a string, by just adding ".toString()" at the end. You can add linebreaks with <br> and add links by the command  <a href='yourTargetSite.html'> .
 By clicking on that link you will be redirected to yourTargetSite.html, where we will be displaying all the data in a graph.
 
 
