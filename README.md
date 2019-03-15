@@ -156,3 +156,65 @@ In popuptext you decide what should be displayed in the popup.Let's keep it simp
 ```
 
 To get the newest values, you take the last entry of each array. For example time[time.length - 1]. To display it in the popuptext, you now also have to convert it into a string, by just adding ".toString()" at the end. You can add linebreaks with <br> and add links by the command  <a href='yourTargetSite.html'>.
+By clicking on that link you will be redirected to yourTargetSite.html, where we will be displaying all the data in a graph.
+
+
+You can control the position of your marker with the popuptext with the function
+
+addMarker(...)
+
+To add more Markers, just call the function several times. For example:
+
+```javascript
+  popuptext1 = "<font color=\"black\">Time: " + time1[time.length - 1].toString() + "<br>Temperature = <a href='temperature1.html'>" + temperature_history1[temperature_history1.length - 1].toString() + " °C</a></font>";
+  popuptext2 = "<font color=\"black\">Time: " + time2[time.length - 1].toString() + "<br>Temperature = <a href='temperature2.html'>" + temperature_history2[temperature_history2.length - 1].toString() + " °C</a></font>";
+    // Position of marker with popuptext
+    addMarker(layer_markers, 22.9612169, 40.6268430, popuptext1);
+    addMarker(layer_markers, 22.961233, 40.626847, popuptext2);
+
+```
+
+When you are able to get the gps data, you can also add them in the addMarker function, instead of hardcoding them in.
+
+That's it.
+
+
+# Display the graph
+
+When you are clicking on a link in the popupwindow, for example Temperature, you will be redirected to the file "temperature.html". If you look at the code, you see, that there a function called "draw()" is executed. Draw will be executed over and over again. 
+
+```javascript
+      <script type='text/javascript'>
+        function draw() {
+          for (let i = 0; i < 1000; i++) {
+            stroke(255 - 255 * i / 1000, 255 - 255 * i / 1000, 255);
+            line(0, i, width, i);
+          }
+
+          push();
+          translate(width / 2, height / 2);
+          rotate(3 * PI / 2);
+          textSize(30);
+          fill(0);
+          noStroke();
+
+          text("Temperature [°C]", 200, -460);
+
+
+          pop();
+          plot(temperature_history, 100, 100, 800, 600, true, true);
+        }
+
+      </script>
+      
+```
+
+The most importat function in here is "plot()". Here you can define what values should be plotted. In this case "temperature_history". The next variables in that function are
+1) "100" =  the left up corner of the graph is 100 Pixel to the right
+2) "100" =  the left up corner of the graph is 100 Pixel away from the top
+3) "800" =  the graph has a width of 800 pixels
+4) "600" =  the graph has a height of 600 pixels
+5) "true" =  the points are connected
+6) "true" =  the plot is normalized
+
+You can play a bit around with that options.
