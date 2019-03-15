@@ -3,6 +3,8 @@
 ## How to use it
 Just download the whole folder as .zip, and unzip it. The main page is called "index.html". Open it and you will see the main page with the map and the newest data from the sensor.
 
+![alt text](https://github.com/bassi23/Thessaloniki_Map/blob/master/vorschau1.png)
+
 ## How to get the sensor data
 
 The sensor data is provided in JSON Format (JavaScript Object Notation) and can be accessed over an API Key. The code for that is in the file "sketch.js". We use the "p5.js" library, in which the functions preload() and loadJSON() is defined.
@@ -179,6 +181,8 @@ That's it.
 
 
 # Display the graph
+
+![alt text](https://github.com/bassi23/Thessaloniki_Map/blob/master/vorschau2.png)
 
 When you are clicking on a link in the popupwindow, for example Temperature, you will be redirected to the file "temperature.html". If you look at the code, you see, that there a function called "draw()" is executed. Draw will be executed over and over again. 
 
