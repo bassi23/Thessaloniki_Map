@@ -106,3 +106,39 @@ Now, that we have all the data, we want to display it as popuptext and with a ma
   </html>
 
 ```
+When the page is loaded, it will automatically call the function "drawmap()", which looks like this:
+
+```javascript
+    // Position and zoom on map
+    var lon = 22.9612169;
+    var lat = 40.6268430;
+    var zoom = 13;
+
+
+    map = new OpenLayers.Map('map', {
+      projection: new OpenLayers.Projection("EPSG:900913"),
+      displayProjection: new OpenLayers.Projection("EPSG:4326"),
+      controls: [
+        new OpenLayers.Control.Navigation(),
+        new OpenLayers.Control.LayerSwitcher(),
+        new OpenLayers.Control.PanZoomBar()
+      ],
+      maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+        20037508.34, 20037508.34),
+      numZoomLevels: 18,
+      maxResolution: 156543,
+      units: 'meters'
+    });
+
+
+    layer_mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
+    layer_markers = new OpenLayers.Layer.Markers("Address", {
+      projection: new OpenLayers.Projection("EPSG:4326"),
+      visibility: true,
+      displayInLayerSwitcher: false,
+      icon: 'https://raw.githubusercontent.com/bassi23/Schadstoffkarte/master/img/SUSmobil_Logo.jpg'
+    });
+    map.addLayers([layer_mapnik, layer_markers]);
+    jumpTo(lon, lat, zoom);
+
+```
