@@ -109,11 +109,12 @@ Now, that we have all the data, we want to display it as popuptext and with a ma
 When the page is loaded, it will automatically call the function "drawmap()", which looks like this:
 
 ```javascript
+
+function drawmap(){
     // Position and zoom on map
     var lon = 22.9612169;
     var lat = 40.6268430;
     var zoom = 13;
-
 
     map = new OpenLayers.Map('map', {
       projection: new OpenLayers.Projection("EPSG:900913"),
@@ -136,9 +137,22 @@ When the page is loaded, it will automatically call the function "drawmap()", wh
       projection: new OpenLayers.Projection("EPSG:4326"),
       visibility: true,
       displayInLayerSwitcher: false,
-      icon: 'https://raw.githubusercontent.com/bassi23/Schadstoffkarte/master/img/SUSmobil_Logo.jpg'
     });
     map.addLayers([layer_mapnik, layer_markers]);
     jumpTo(lon, lat, zoom);
+        // Position of marker with popuptext
+    addMarker(layer_markers, 22.9612169, 40.6268430, popuptext);
+    }
 
 ```
+
+The most important things to know here are the variable "popuptext" and the function "addMarker(layer_markers, lat, lon, popuptext)".
+
+In popuptext you decide what should be displayed in the popup.Let's keep it simple with just 2 entries, time and temperature. You can add as many entries as you want with the same principle.
+
+
+```javascript
+  popuptext = "<font color=\"black\">Time: " + time[time.length - 1].toString() + "<br>Temperature = <a href='temperature.html'>" + temperature_history[temperature_history.length - 1].toString() + " °C</a></font>";
+```
+
+To get the newest values, you take the last entry of each array. For example time[time.length - 1]. To display it in the popuptext, you now also have to convert it into a string, by just adding ".toString()" at the end. You can add linebreaks with <br> and add links by the command  <a href='yourTargetSite.html'>.
