@@ -1,6 +1,6 @@
 let data;
 let url = "https://airapi.airly.eu/v2/measurements/nearest?indexType=AIRLY_CAQI&lat=40.626735&lng=22.961053&maxDistanceKM=1";
-let apikey = "85E4GYOCveUL5M6YaOYjgsm83AvzVYba";
+let apikey = "_____";  // YourAPIKeyHere!!
 
 
 //History data, initialization
